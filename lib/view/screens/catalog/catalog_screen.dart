@@ -17,7 +17,7 @@ class ModelCatalogScreen extends StatelessWidget {
     return AppBar(
       leading: const CircleAvatar(
         backgroundImage: AssetImage(
-            'assets/images/your_profile_picture.jpg'), // No estoy seguro de como hacerle para ya cuando sea live
+            'assets/images/profile.PNG'), // No estoy seguro de como hacerle para ya cuando sea live
       ),
       title: const Text('Model Catalog'),
       actions: [

@@ -28,8 +28,8 @@ class MarketListingViewModel {
       context: context,
       position: RelativeRect.fromRect(
         Rect.fromPoints(
-          overlay.localToGlobal(overlay.size.bottomLeft(Offset.zero)),
-          overlay.localToGlobal(overlay.size.bottomRight(Offset.zero)),
+          overlay.localToGlobal(overlay.size.topRight(Offset.zero)),
+          overlay.localToGlobal(overlay.size.topLeft(Offset.zero)),
         ),
         Offset.zero & overlay.size,
       ),
@@ -45,27 +45,27 @@ class MarketListingViewModel {
       ],
     ).then((value) {
       if (value != null) {
-        // Handle menu item selection here
+        // cuando haga algo es aqui
         print('Selected: $value');
       }
     });
   }
 
   static Widget buildBody(BuildContext context) {
-    // Replace with actual data from postListingDetails DTO
+    // viene de dto, son valores falsos, aun se tiene que implementar
     PostListingDetails postDetails = PostListingDetails(
       title: 'Product Title',
       price: '\$100',
       description: 'Product description and requirements go here.',
       vendorName: 'Vendor Name',
-      vendorDetails: 'https://www.vendorwebsite.com', // Replace with actual vendor website
+      vendorDetails: 'https://www.vendorwebsite.com', // lo mismo
     );
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildImageCarousel(), // Replace with your image carousel widget
+          _buildImageCarousel(), // aqui va el carrusel
           const SizedBox(height: 16.0),
           _buildTitle(postDetails.title),
           _buildPrice(postDetails.price),
@@ -82,10 +82,10 @@ class MarketListingViewModel {
   }
 
   static Widget _buildImageCarousel() {
-    // Replace with your image carousel widget (e.g., using PageView or any image carousel package)
+    // aqui van las imagenes de carrusel, aun no implementado
     return Container(
       height: 200.0,
-      color: Colors.grey, // Placeholder color
+      color: Colors.grey, // para que no se vea blanco, y que se note que falta algo
     );
   }
 
@@ -113,8 +113,8 @@ class MarketListingViewModel {
   static Widget _buildContactButton(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {
-        // Navigate to chat screen
-        Navigator.pushNamed(context, '/chat'); // Replace with your actual chat screen route
+       // deberia llevarte al chat screen
+        Navigator.pushNamed(context, '/chat');
       },
       icon: const Icon(Icons.chat),
       label: const Text('Contact Lister'),
@@ -139,7 +139,7 @@ class MarketListingViewModel {
         IconButton(
           icon: Icon(icon),
           onPressed: () {
-            // Handle action button tap
+            // este es un constructor generico para los botones
           },
         ),
         const SizedBox(height: 4.0),
@@ -151,7 +151,7 @@ class MarketListingViewModel {
   static Widget _buildVendorInfo(String vendorName, String vendorDetails) {
     return Row(
       children: [
-        // Left Container (2/3 width)
+        //flex de 2/3
         Expanded(
           flex: 2,
           child: Container(
@@ -178,8 +178,8 @@ class MarketListingViewModel {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4.0),
-                          // Add member since date here
-                          const Text('Member Since: January 2023'), // Replace with actual member since date
+                          // desde cuando se unio
+                          const Text('Member Since: January 2023'), // fecha de creacion todo dto
                         ],
                       ),
                     ],
@@ -189,7 +189,7 @@ class MarketListingViewModel {
             ),
           ),
         ),
-        // Right Container (1/3 width)
+        // flex de 1/3
         Expanded(
           flex: 1,
           child: Container(
@@ -199,7 +199,7 @@ class MarketListingViewModel {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Handle vendor details link tap
+                    // paginas paginas
                     print('Vendor details tapped');
                   },
                   child: const Text(
@@ -218,17 +218,16 @@ class MarketListingViewModel {
   }
 
   static Widget _buildVendorProfile() {
-    // Replace with your actual vendor profile picture widget
     return const CircleAvatar(
       radius: 20.0,
-      backgroundImage: AssetImage('assets/vendor_profile_picture.jpg'), // Replace with actual image URL or path
+      backgroundImage: AssetImage('assets/images/profile.PNG'),
     );
   }
 
   static Widget _buildFollowButton() {
     return ElevatedButton(
       onPressed: () {
-        // Handle follow button tap
+        // no se como implementar esto pero luego lo averiguo
       },
       child: const Text('Follow'),
     );

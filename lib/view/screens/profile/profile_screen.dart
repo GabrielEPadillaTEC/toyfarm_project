@@ -29,7 +29,7 @@ class _ProfileView extends StatelessWidget {
 
             const CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/profile_picture.jpg'), // imagen perfil, ver como hacer esto desde llamada remota a servidor o algo
+              backgroundImage: AssetImage('assets/images/profile.PNG'), // imagen perfil, ver como hacer esto desde llamada remota a servidor o algo
             ),
             const SizedBox(height: 10),
             const Text(

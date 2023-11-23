@@ -31,7 +31,7 @@ class _LoginView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/toyfarmlogo.png', height: 100, width: 100),
+            Image.asset('assets/images/logo.png', height: 100, width: 100),
             const SizedBox(height: 20),
             const TextField(
               decoration: InputDecoration(

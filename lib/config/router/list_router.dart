@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/view/screens.dart';
+import 'package:toyfarn_project/view/screens/chat/chat_screen.dart';
 
 
 
@@ -30,5 +31,10 @@ final List<RouteBase> routes = [
     path: '/listing',
     name: MarketListingScreen.screenName,
     builder: (context, state) => const MarketListingScreen(),
+  ),
+  GoRoute(
+    path: '/chat',
+    name: ChatScreen.screenName,
+    builder: (context, state) => const ChatScreen(),
   ),
 ];

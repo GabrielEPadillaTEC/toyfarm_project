@@ -37,5 +37,11 @@ List<MenuItem> appMenuItems = <MenuItem>[
       subTitle: 'Listado de prueba',
       link: '/listing',
       icon: Icons.money
-  )
+  ),
+  const MenuItem(
+      title: 'Chat',
+      subTitle: 'Chat de prueba',
+      link: '/chat',
+      icon: Icons.money
+  ),
 ];
