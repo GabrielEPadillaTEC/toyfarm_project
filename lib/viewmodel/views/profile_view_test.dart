@@ -12,7 +12,7 @@ class ProfileSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ProfileViewModel(), // Create an instance of your ChatProvider
-      child:  Scaffold(
+      child:  const Scaffold(
         body: ProfileView(),
       ),
     );
@@ -47,17 +47,17 @@ class ProfileSection extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 profileViewModel.userProfile.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
               Text(
                 profileViewModel.userProfile.location,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 5),
               Text(
                 profileViewModel.userProfile.description,
-                style: TextStyle(fontSize: 14, color: Colors.grey),
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
