@@ -16,7 +16,6 @@ class ProfileSection extends StatelessWidget {
   }
 }
 
-
   class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
