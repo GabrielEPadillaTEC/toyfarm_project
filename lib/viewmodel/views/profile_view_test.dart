@@ -10,65 +10,65 @@ class ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ProfileViewModel(), // Create an instance of your ChatProvider
-      child:  Scaffold(
+    return const Scaffold(
         body: ProfileView(),
-      ),
     );
   }
 }
 
-
-
- // @override
- // Widget build(BuildContext context) {
-  //  final chatProvider = context.watch<ChatProvider>();
-  //  return Container(
 
   class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final profileViewModel = context.watch<ProfileViewModel>();
-    profileViewModel.fetchUserProfile(202311304505);
+    final profileViewModel = ProfileViewModel();
+
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage(profileViewModel.userProfile.profileImageUrl), // Use userProfile data
+        child: FutureBuilder(
+          future: profileViewModel.fetchUserProfile(202311304505),
+          builder: (context, snapshot) {
+            return (snapshot.connectionState==ConnectionState.done)? Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage(profileViewModel.userProfile.profileImageUrl), // Use userProfile data
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    profileViewModel.userProfile.name,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    profileViewModel.userProfile.location,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    profileViewModel.userProfile.description,
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    child: const Text('Follow'),
+                  ),
+                  // ... Rest of the code using userProfile data
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                profileViewModel.userProfile.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ):Center(
+              child: CircularProgressIndicator(
+                color: Colors.cyan,
               ),
-              const SizedBox(height: 5),
-              Text(
-                profileViewModel.userProfile.location,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                profileViewModel.userProfile.description,
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                child: const Text('Follow'),
-              ),
-              // ... Rest of the code using userProfile data
-            ],
-          ),
+            );
+          }
         ),
       ),
     );
