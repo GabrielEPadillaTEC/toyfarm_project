@@ -18,7 +18,7 @@ class PostListingMapper {
     return PostListingDTO(
       id: apiResponse['id'] ?? 0,
       title: apiResponse['title'] ?? '',
-      price:  apiResponse['price'] ?? 0.0,
+      price:  apiResponse['price'] ?? '',
       description: apiResponse['description'] ?? '',
       vendorName: apiResponse['vendorName'] ?? '',
       vendorDetails: apiResponse['vendorDetails'] ?? '',

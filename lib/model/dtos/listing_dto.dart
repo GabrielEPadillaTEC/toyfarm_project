@@ -19,7 +19,7 @@ class PostListingDTO {
     return PostListingDTO(
       id:  json[''] ?? 0,
       title:   json[''] ?? '',
-      price:   json[''] ?? 0.0,
+      price:   json[''] ?? '',
       description:   json[''] ?? '',
       vendorName:   json[''] ?? '',
       vendorDetails:   json[''] ?? '',
