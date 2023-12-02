@@ -4,9 +4,8 @@ import 'package:toyfarn_project/model/dtos/user_profile_dto.dart'; // Import you
 import 'package:toyfarn_project/infrastructure/mappers/user_profile_mapper.dart'; // Import your UserProfileMapper class
 import 'package:toyfarn_project/config/helpers/user_profileDio.dart'; // Import your UserProfileApiService class
 
-class ProfileViewModel {
+class CatalogViewModel{
   final UserProfileApiService _apiService = UserProfileApiService();
-
   late UserProfile _userProfile;
 
   UserProfile get userProfile => _userProfile;

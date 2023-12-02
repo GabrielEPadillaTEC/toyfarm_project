@@ -4,19 +4,8 @@ import 'package:toyfarn_project/infrastructure/mappers/user_profile_mapper.dart'
 import 'package:provider/provider.dart'; // Import Provider package
 import 'package:toyfarn_project/viewmodel/providers/profile_viewmodel.dart'; // Import your ProfileViewModel class
 
-class ProfileSection extends StatelessWidget {
+class ProfileView extends StatelessWidget {
   static const String screenName = 'profile view';
-  const ProfileSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-        body: ProfileView(),
-    );
-  }
-}
-
-  class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
@@ -35,7 +24,7 @@ class ProfileSection extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage(profileViewModel.userProfile.profileImageUrl), // Use userProfile data
+                    backgroundImage: NetworkImage(profileViewModel.userProfile.profileImageUrl), // Use userProfile data
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -62,7 +51,7 @@ class ProfileSection extends StatelessWidget {
                   // ... Rest of the code using userProfile data
                 ],
               ),
-            ):Center(
+            ):const Center(
               child: CircularProgressIndicator(
                 color: Colors.cyan,
               ),
