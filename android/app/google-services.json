@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "809299919138",
+    "project_id": "toyfarm-47551",
+    "storage_bucket": "toyfarm-47551.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809299919138:android:3508bbe8ceedd614c4e57b",
+        "android_client_info": {
+          "package_name": "com.example.toyfarn_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3mp4xOQJPTUINGS6HxJ9oCCb23Fbgvbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
