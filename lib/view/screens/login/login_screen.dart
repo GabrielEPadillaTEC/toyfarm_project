@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/viewmodel/widgets/widgets.dart';
-
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatelessWidget  with AppBarCustom{
 
@@ -13,15 +13,52 @@ class LoginScreen extends StatelessWidget  with AppBarCustom{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarWithReturnButton(title: 'Login Screen'),
-      body: const _LoginView(),
+      body: _LoginView(),
      // floatingActionButton: const ButtonReturnPage(),
     );
   }
 }
 
-class _LoginView extends StatelessWidget {
+class _LoginView extends StatefulWidget {
   const _LoginView();
 
+  @override
+  _LoginViewState createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<_LoginView> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  bool _isLoggingIn = false;
+  String _errorMessage = '';
+
+  Future<void> _login() async {
+    setState(() {
+      _isLoggingIn = true;
+      _errorMessage = '';
+    });
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _usernameController.text,
+        password: _passwordController.text,
+      );
+
+      // Authentication successful, navigate to the desired screen
+      GoRouter.of(context).go('/dummy');
+    } catch (e) {
+      // Handle authentication errors here
+      setState(() {
+        _errorMessage = 'Email or password introduced were invalid';
+      });
+      print('Error: $e');
+    } finally {
+      setState(() {
+        _isLoggingIn = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +76,7 @@ class _LoginView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            const  TextField(
+            const TextField(
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -47,12 +84,17 @@ class _LoginView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                //aqui va la logica del login, por mientras va a un dummy, tampoco implementado
-                GoRouter.of(context).go('/dummy');
-              },
-              child: const Text('Log In'),
+              onPressed: _isLoggingIn ? null : _login,
+              child: _isLoggingIn
+                  ? const CircularProgressIndicator()
+                  : const Text('Log In'),
             ),
+            const SizedBox(height: 10),
+            if (_errorMessage.isNotEmpty)
+              Text(
+                _errorMessage,
+                style: const TextStyle(color: Colors.red),
+              ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
