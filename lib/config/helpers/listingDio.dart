@@ -11,4 +11,5 @@ class PostListingApiService {
       throw Exception('Failed to get user profile data');
     }
   }
+
 }

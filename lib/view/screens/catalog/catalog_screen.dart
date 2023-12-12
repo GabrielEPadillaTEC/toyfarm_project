@@ -1,47 +1,172 @@
 import 'package:flutter/material.dart';
+import 'package:toyfarn_project/viewmodel/widgets/slideMenu/slide_menu.dart';
 
-class ModelCatalogScreen extends StatelessWidget {
-  static const String screenName = 'model_catalog_screen';
+import '../../../model/dtos/catalog_dto.dart';
 
-  const ModelCatalogScreen({super.key});
+class ModelCatalogScreen extends StatelessWidget{
+  static const String screenName = 'catalog_screen';
+  static const String screenNameHome = 'home_catalog_screen';
+  static const String screenNameModel = 'model_catalog_screen';
+  static const String screenNameService = 'services_catalog_screen';
+  static const String screenNameListings = 'listigs_catalog_screen';
+
+  const ModelCatalogScreen({Key? key, required this.option}) : super(key: key);
+  final String option;
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildCatalog(),
+      drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
   }
 
   AppBar _buildAppBar() {
+    String appBarTitle = 'Model Catalog'; // Default title
+
+    // Update title based on the option
+    if (option == 'listings') {
+      appBarTitle = 'Listings Catalog';
+    } else if (option == 'services') {
+      appBarTitle = 'Services & Printing';
+    } else if (option == 'models') {
+      appBarTitle = '3D Models & Resources';
+    } else if (option == 'home') {
+    appBarTitle = 'Toyfarm Home';
+    }
+
     return AppBar(
-      leading: const CircleAvatar(
-        backgroundImage: AssetImage(
-            'assets/images/profile.PNG'), // No estoy seguro de como hacerle para ya cuando sea live
-      ),
-      title: const Text('Model Catalog'),
+      title: Text(appBarTitle),
       actions: [
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            // todo: se supone que va el buscador aqui
-            // no funciona obvio
+            // TODO: Add search functionality
           },
         ),
       ],
     );
   }
 
-  Widget _buildCatalog() {
-    // se supone que ocupa un dto, pendiente
-    List<ModelCatalogDTO> models = [
-      ModelCatalogDTO('Model 1', 'Cost 1'),
-      ModelCatalogDTO('Model 2', 'Cost 2'),
-      ModelCatalogDTO('Model 3', 'Cost 3'),
-      // ... valores locales de prueba
-    ];
+ Widget _buildCatalog() {
 
-    //magia china del grid para nuestro catalogo
+    if (option == 'listings') {
+      List<ModelCatalogDTO> models = [
+        ModelCatalogDTO(name: 'Model 1', cost: 'Cost 1' ),
+        ModelCatalogDTO(name: 'Model 2', cost: 'Cost 2' ),
+        ModelCatalogDTO(name: 'Model 3', cost: 'Cost 3' ),
+        // ... valores locales de prueba
+      ];
+      return _buildOptionCatalog(models);
+
+    } else if (option == 'services') {
+      List<ModelCatalogDTO> models = [
+        ModelCatalogDTO(name: 'Model 4', cost: 'Cost 1' ),
+        ModelCatalogDTO(name: 'Model 5', cost: 'Cost 2' ),
+        ModelCatalogDTO(name: 'Model 6', cost: 'Cost 3' ),
+        // ... valores locales de prueba
+      ];
+      return _buildOptionCatalog(models);
+
+    } else if (option == 'models') {
+      List<ModelCatalogDTO> models = [
+        ModelCatalogDTO(name: 'Model 7', cost: 'Cost 1' ),
+        ModelCatalogDTO(name: 'Model 8', cost: 'Cost 2' ),
+        ModelCatalogDTO(name: 'Model 9', cost: 'Cost 3' ),
+        // ... valores locales de prueba
+      ];
+      return _buildOptionCatalog(models);
+
+    } else {
+      return Container(
+        color: const Color(0xFFFCE9D3), // Very pale orange
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Welcome to ToyFarm!',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10.0),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 100.0,
+              width: 100.0,
+            ),
+            const SizedBox(height: 10.0),
+            const Text(
+              'Home to creators and hobbyists alike',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 16.0,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            const Text(
+              'We currently host a variety of services',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 16.0,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            const Text(
+              'News:',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                  'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 16.0,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            const Text(
+              'About us:',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                  'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 16.0,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            // Chess piece image with 20% opacity
+            Opacity(
+              opacity: 0.2,
+              child: Image.asset(
+                'assets/images/LightPawn.webp',
+                height: 100.0,
+                width: 100.0,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  Widget _buildOptionCatalog(List<ModelCatalogDTO> models) {
+
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -107,10 +232,5 @@ class ModelCatalogScreen extends StatelessWidget {
     );
   }
 }
-class ModelCatalogDTO {
-  final String name;
-  final String cost;
 
-  ModelCatalogDTO(this.name, this.cost);
-}
 

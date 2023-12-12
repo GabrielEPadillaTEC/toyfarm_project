@@ -14,14 +14,8 @@ class PostListingViewModel {
   Future<void> fetchUserProfile(int id) async {
     try {
       final apiResponse = await _apiService.getPostListingData(id);
-      print("apiResponse");
-      print(apiResponse);
       final postListingDTO = PostListingMapper.mapApiResponseToDTO(apiResponse);
-      print("postListingDTO");
-      print(postListingDTO);
       _listingDetails = PostListingMapper.postListingDTOToEntity(postListingDTO);
-      print("_listingDetails");
-      print(_listingDetails);
     } catch (error) {
       // Handle error, e.g., show an error message
       print('Error fetching user profile: $error');

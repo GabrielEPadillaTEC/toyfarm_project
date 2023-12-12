@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:toyfarn_project/viewmodel/widgets/post_lister/post_lister_viewmodel.dart'; // Import ViewModel
 
-class CatalogScreenSelect extends StatelessWidget {
-  static const String screenName = 'catalog_screen';
-  final int idListing;
+class PostListerScreen extends StatelessWidget {
+  static const String screenName = 'post_lister_screen';
 
-  const CatalogScreenSelect({super.key, required this.idListing});
+  const PostListerScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

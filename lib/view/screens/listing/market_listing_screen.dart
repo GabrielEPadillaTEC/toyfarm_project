@@ -10,7 +10,7 @@ class MarketListingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MarketListingViewModel.buildAppBar(context), // se manda llamar al viewmodel
-      body: const MarketListingViewModel(idListing: 2023113045059999,), // lo mismo
+      body: const MarketListingViewModel(idListing: 2023113045059999), // lo mismo
     );
   }
 }
