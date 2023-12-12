@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
           title: const Text('Menu de Materia 3'),
         ),
         body: ListView.builder(
-            itemCount: appMenuItems.length, itemBuilder: menuList),
+            itemCount: appMenuItems.length,
+            itemBuilder: menuList
+        ),
         drawer: SideMenu(scaffoldKey: scaffoldKey));
   }
 

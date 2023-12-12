@@ -21,6 +21,12 @@ List<MenuItem> appMenuItems = <MenuItem>[
       icon: Icons.smart_button_outlined
      ),
   const MenuItem(
+      title: 'Register',
+      subTitle: 'prueba registro',
+      link: '/register',
+      icon: Icons.smart_button_rounded
+  ),
+  const MenuItem(
       title: 'Profile',
       subTitle: 'profile de prueba',
       link: '/profile',
@@ -36,6 +42,12 @@ List<MenuItem> appMenuItems = <MenuItem>[
       title: 'Listing',
       subTitle: 'Listado de prueba',
       link: '/listing',
+      icon: Icons.money
+  ),
+  const MenuItem(
+      title: 'Listador de Ofertas o Posts',
+      subTitle: 'Listado de prueba',
+      link: '/post_lister',
       icon: Icons.money
   ),
   const MenuItem(

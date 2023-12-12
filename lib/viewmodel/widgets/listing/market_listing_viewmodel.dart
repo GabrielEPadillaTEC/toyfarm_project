@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/domain/entities/listing.dart';
 import 'package:toyfarn_project/domain/entities/offer.dart';
 import 'package:toyfarn_project/viewmodel/providers/profile_viewmodel.dart';
 import 'package:toyfarn_project/viewmodel/providers/listing_viewmodel.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../config/helpers/offerDio.dart';
 
@@ -219,11 +221,47 @@ class MarketListingViewModel extends StatelessWidget  {
   }
 
   static Widget _buildImageCarousel() {
-    // aqui van las imagenes de carrusel, aun no implementado
-    return Container(
-      height: 200.0,
-      color: Colors.grey, // para que no se vea blanco, y que se note que falta algo
+
+    // Replace these with your actual image URLs
+    List<String> imageUrls = [
+      'https://picsum.photos/200/300',
+      'https://picsum.photos/200/300',
+      'https://picsum.photos/200/300',
+    ];
+
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 200.0,
+        autoPlay: true,
+        aspectRatio: 16 / 9,
+        enlargeCenterPage: true,
+      ),
+      items: imageUrls.map((url) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
+              child: Image.network(
+                url,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
+
+
+
+// aqui van las imagenes de carrusel, aun no implementado
+    // return Container(
+    //   height: 200.0,
+    //   color: Colors.grey, // para que no se vea blanco, y que se note que falta algo
+    // );
   }
 
   static Widget _buildTitle(String title) {
@@ -251,7 +289,7 @@ class MarketListingViewModel extends StatelessWidget  {
     return ElevatedButton.icon(
       onPressed: () {
        // deberia llevarte al chat screen
-        Navigator.pushNamed(context, '/chat');
+        context.push('/chat');
       },
       icon: const Icon(Icons.chat),
       label: const Text('Contact Lister'),

@@ -18,6 +18,11 @@ final List<RouteBase> routes = [
     builder: (context, state) => const LoginScreen(),
   ),
   GoRoute(
+    path: '/register',
+    name: RegisterScreen.screenName,
+    builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
     path: '/profile',
     name: ProfileScreen.screenName,
     builder: (context, state) => const ProfileScreen(),
@@ -25,12 +30,52 @@ final List<RouteBase> routes = [
   GoRoute(
     path: '/catalog',
     name: ModelCatalogScreen.screenName,
-    builder: (context, state) => const ModelCatalogScreen(),
+    builder: (context, state) {
+     // Pass the parameter to the screen
+      return const ModelCatalogScreen(option: 'home');
+    },
+  ),
+  GoRoute(
+    path: '/HomeCatalog',
+    name: ModelCatalogScreen.screenNameHome,
+    builder: (context, state) {
+     // Pass the parameter to the screen
+      return const ModelCatalogScreen(option: 'home');
+    },
+  ),
+  GoRoute(
+    path: '/ModelsCatalog',
+    name: ModelCatalogScreen.screenNameModel,
+    builder: (context, state) {
+     // Pass the parameter to the screen
+      return const ModelCatalogScreen(option: 'models');
+    },
+  ),
+  GoRoute(
+    path: '/ServicesCatalog',
+    name: ModelCatalogScreen.screenNameService,
+    builder: (context, state) {
+      // Pass the parameter to the screen
+      return const ModelCatalogScreen(option: 'services');
+    },
+  ),
+  GoRoute(
+    path: '/ListingsCatalog',
+    name: ModelCatalogScreen.screenNameListings,
+    builder: (context, state) {
+      // Pass the parameter to the screen
+      return const ModelCatalogScreen(option: 'listings');
+    },
   ),
   GoRoute(
     path: '/listing',
     name: MarketListingScreen.screenName,
     builder: (context, state) => const MarketListingScreen(),
+  ),
+  GoRoute(
+    path: '/post_lister',
+    name: PostListerScreen.screenName,
+    builder: (context, state) => const PostListerScreen(),
   ),
   GoRoute(
     path: '/chat',

@@ -46,7 +46,7 @@ class _LoginViewState extends State<_LoginView> {
       );
 
       // Authentication successful, navigate to the desired screen
-      GoRouter.of(context).go('/dummy');
+      GoRouter.of(context).go('/catalog');
     } catch (e) {
       // Handle authentication errors here
       setState(() {
@@ -63,47 +63,51 @@ class _LoginViewState extends State<_LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/logo.png', height: 100, width: 100),
-            const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Username',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/logo.png', height: 100, width: 100),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
+              const SizedBox(height: 10),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _isLoggingIn ? null : _login,
-              child: _isLoggingIn
-                  ? const CircularProgressIndicator()
-                  : const Text('Log In'),
-            ),
-            const SizedBox(height: 10),
-            if (_errorMessage.isNotEmpty)
-              Text(
-                _errorMessage,
-                style: const TextStyle(color: Colors.red),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _isLoggingIn ? null : _login,
+                child: _isLoggingIn
+                    ? const CircularProgressIndicator()
+                    : const Text('Log In'),
               ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                // registro
-                GoRouter.of(context).go('/register');
-              },
-              child: const Text('Register'),
-            ),
-          ],
+              const SizedBox(height: 10),
+              if (_errorMessage.isNotEmpty)
+                Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  // registro
+                  GoRouter.of(context).go('/register');
+                },
+                child: const Text('Register'),
+              ),
+            ],
+          ),
         ),
       ),
     );
