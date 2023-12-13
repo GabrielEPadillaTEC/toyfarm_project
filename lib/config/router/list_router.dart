@@ -1,11 +1,12 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/view/screens.dart';
 import 'package:toyfarn_project/view/screens/chat/chat_screen.dart';
 
 
-
+String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
 final List<RouteBase> routes = [
   GoRoute(
     path: '/',
@@ -25,7 +26,12 @@ final List<RouteBase> routes = [
   GoRoute(
     path: '/profile',
     name: ProfileScreen.screenName,
-    builder: (context, state) => const ProfileScreen(),
+    builder: (context, state) => const ProfileScreen(profileuid: '0'),
+  ),
+  GoRoute(
+    path: '/YourProfile',
+    name: ProfileScreen.screenName,
+    builder: (context, state) => ProfileScreen(profileuid: userId),
   ),
   GoRoute(
     path: '/catalog',
@@ -75,7 +81,17 @@ final List<RouteBase> routes = [
   GoRoute(
     path: '/post_lister',
     name: PostListerScreen.screenName,
-    builder: (context, state) => const PostListerScreen(),
+    builder: (context, state) => const PostListerScreen(option: 'offers','0'),
+  ),
+  GoRoute(
+    path: '/YourListings',
+    name: PostListerScreen.screenNameLister,
+    builder: (context, state) => PostListerScreen(option: 'listers',profileuid: userId),
+  ),
+  GoRoute(
+    path: '/YourOffers',
+    name: PostListerScreen.screenNameOffers,
+    builder: (context, state) => PostListerScreen(option: 'offers',profileuid: userId),
   ),
   GoRoute(
     path: '/chat',

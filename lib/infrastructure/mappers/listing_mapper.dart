@@ -24,4 +24,25 @@ class PostListingMapper {
       vendorDetails: apiResponse['vendorDetails'] ?? '',
     );
   }
+  static List<PostListingDetails> mapApiResponseToEntity(dynamic offerData) {
+    if (offerData is List && offerData.isNotEmpty) {
+      return offerData.map((data) => _mapOffer(data)).toList();
+    } else {
+      return [];
+    }
+  }
+
+  static PostListingDetails _mapOffer(Map<String, dynamic> data) {
+    return PostListingDetails(
+
+      id: data['id'] as int,
+      title: data['title'] as String,
+      price:  data['price'] as String,
+      description: data['description'] as String,
+      vendorName: data['vendorName'] as String,
+      vendorDetails: data['vendorDetails'] as String,
+    );
+
+
+  }
 }

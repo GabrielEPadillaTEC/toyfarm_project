@@ -1,6 +1,6 @@
 class OfferEntity {
   final int id;
-  final int userProfileId;
+  final String userProfileId;
   final DateTime date;
   final int postListingId;
   final double offerValue;

@@ -15,7 +15,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: profileViewModel.fetchUserProfile(202311304505),
+          future: profileViewModel.fetchUserProfile('202311304505'),
           builder: (context, snapshot) {
             return (snapshot.connectionState==ConnectionState.done)? Padding(
               padding: const EdgeInsets.all(16.0),

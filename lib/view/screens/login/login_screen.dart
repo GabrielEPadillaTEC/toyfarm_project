@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/viewmodel/widgets/widgets.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:toyfarn_project/viewmodel/user/user_provider.dart';
+
 
 class LoginScreen extends StatelessWidget  with AppBarCustom{
 
@@ -44,9 +46,11 @@ class _LoginViewState extends State<_LoginView> {
         email: _usernameController.text,
         password: _passwordController.text,
       );
+      // Store the user credentials globally
+      //context.read(userProvider.notifier).setUser(userCredential.user);
 
       // Authentication successful, navigate to the desired screen
-      GoRouter.of(context).go('/catalog');
+      GoRouter.of(context).go('/HomeCatalog');
     } catch (e) {
       // Handle authentication errors here
       setState(() {

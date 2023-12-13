@@ -35,7 +35,7 @@ class OfferMapper {
   static OfferEntity _mapOffer(Map<String, dynamic> data) {
     return OfferEntity(
       id: data['id'] as int,
-      userProfileId: data['userProfileId'] as int,
+      userProfileId: data['userProfileId'] as String,
       date: _parseDate(data['date'] as String),
       postListingId: data['postListingId'] as int,
       offerValue: data['offerValue'] as double,

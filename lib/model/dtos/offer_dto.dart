@@ -1,6 +1,6 @@
 class OfferDTO {
   final int id;
-  final int userProfileId;
+  final String userProfileId;
   final String date; // String representation of DateTime in ISO 8601 format
   final int postListingId;
   final double offerValue;
@@ -17,7 +17,7 @@ class OfferDTO {
   factory OfferDTO.fromJson(Map<String, dynamic> json) {
     return OfferDTO(
       id: json['id'] ?? 0,
-      userProfileId: json['userProfileId'] ?? 0,
+      userProfileId: json['userProfileId'] ?? '',
       date: json['date'] ?? '',
       postListingId: json['postListingId'] ?? 0,
       offerValue: (json['offerValue'] ?? 0.0).toDouble(),

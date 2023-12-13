@@ -7,21 +7,25 @@ import 'package:toyfarn_project/viewmodel/providers/profile_viewmodel.dart';
 import 'package:toyfarn_project/viewmodel/providers/listing_viewmodel.dart';
 
 import '../../../config/helpers/offerDio.dart';
+import '../../../config/helpers/userOffersDio.dart';
 
 class PostListerViewModel extends StatelessWidget {
 
-  final int idListing;
+  final String userUID;
+  final int opcionSelect;
+  //ofers 1
+  //listings 2
 
-  const PostListerViewModel({super.key, required this.idListing});
+  const PostListerViewModel({super.key, required this.userUID,required this.opcionSelect});
 
   @override
   Widget build(BuildContext context) {
     //final postListingViewModel = PostListingViewModel();
-    final api = OfferApiService();
+    final api = UserListerApiService();
 
     return SingleChildScrollView(
         child: FutureBuilder(
-            future: api.getOffers(idListing),
+            future: api.getUserOffersListings(userUID,opcionSelect),
             builder: (context, snapshot) {
               return (snapshot.connectionState == ConnectionState.done)
                   ? _buildOffers(api.offerList)
