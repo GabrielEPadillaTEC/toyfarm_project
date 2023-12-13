@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/viewmodel/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:toyfarn_project/config/helpers/registerDio.dart';
+
+import '../../../model/dtos/user_profile_dto.dart';
 
 class RegisterScreen extends StatelessWidget with AppBarCustom, CustomSnackBars{
   static const String screenName = 'register_screen';
@@ -25,6 +28,7 @@ class _RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<_RegisterView> with  CustomSnackBars{
+  final TextEditingController _nicknameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -49,12 +53,36 @@ class _RegisterViewState extends State<_RegisterView> with  CustomSnackBars{
         email: _usernameController.text,
         password: _passwordController.text,
       );
+        String? newuid =userCredential.user?.uid;
+      if (newuid != null) {
 
+        UserProfileDTO userProfile = UserProfileDTO(
+          name: _nicknameController.text,
+          location: 'City TBA',
+          description: 'Im a New User',
+          profileImageUrl: 'https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg',
+          followers: 0,
+          following: 0,
+          website: 'http://example.com',
+          memberSince: DateTime.now().toString(),
+          channelViews: 0,
+          likes: 0,
+          modelsCreated: 0,
+        );
+
+        bool success = await createProfile(newuid,userProfile);
+        if(success){
+          showRegistrationSuccessNotification();
+          // Redirect to the login screen
+          GoRouter.of(context).go('/login');
+        }
+
+      } else {
+        // User not logged in or has just logged out.
+      }
       // Registration successful
 
-      showRegistrationSuccessNotification();
-      // Redirect to the login screen
-      GoRouter.of(context).go('/login');
+
     } catch (e) {
       // Handle registration errors here
       setState(() {
@@ -87,9 +115,16 @@ class _RegisterViewState extends State<_RegisterView> with  CustomSnackBars{
               Image.asset('assets/images/logo.png', height: 100, width: 100),
               const SizedBox(height: 20),
               TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
+                controller: _nicknameController,
+                decoration: const InputDecoration(
                   labelText: 'Username',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
                 ),
               ),
               const SizedBox(height: 10),

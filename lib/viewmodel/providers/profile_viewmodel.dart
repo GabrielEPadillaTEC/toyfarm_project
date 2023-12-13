@@ -11,7 +11,7 @@ class ProfileViewModel {
 
   UserProfile get userProfile => _userProfile;
 
-  Future<void> fetchUserProfile(int userId) async {
+  Future<void> fetchUserProfile(String userId) async {
     try {
       final apiResponse = await _apiService.getUserProfileData(userId);
       final userProfileDTO = UserProfileMapper.mapApiResponseToDTO(apiResponse);

@@ -3,14 +3,17 @@ import 'package:toyfarn_project/viewmodel/widgets/post_lister/post_lister_viewmo
 
 class PostListerScreen extends StatelessWidget {
   static const String screenName = 'post_lister_screen';
+  static const String screenNameLister = 'post_lister_screen_offer';
+  static const String screenNameOffers = 'post_lister_screen_listings';
 
-  const PostListerScreen({Key? key}) : super(key: key);
-
+  const PostListerScreen({Key? key, required this.option}) : super(key: key);
+  final String option;
+  final String userUID;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PostListerViewModel.buildAppBar(context), // se manda llamar al viewmodel
-      body: const PostListerViewModel(idListing: 2023113045059999), // lo mismo
+      body: PostListerViewModel(userUID: userUID), // lo mismo
     );
   }
 }

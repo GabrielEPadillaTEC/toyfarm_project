@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toyfarn_project/viewmodel/providers/profile_viewmodel.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  final String profileuid;
+  const ProfileView({super.key, required this.profileuid});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder(
-            future: profileViewModel.fetchUserProfile(202311304505),
+            future: profileViewModel.fetchUserProfile(profileuid),
             builder: (context, snapshot) {
               return (snapshot.connectionState == ConnectionState.done)
                   ? Padding(
