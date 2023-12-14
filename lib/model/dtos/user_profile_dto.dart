@@ -1,5 +1,6 @@
 class UserProfileDTO {
   final String name;
+  final String email;
   final String location;
   final String description;
   final String profileImageUrl;
@@ -13,6 +14,7 @@ class UserProfileDTO {
 
   UserProfileDTO({
     required this.name,
+    required this.email,
     required this.location,
     required this.description,
     required this.profileImageUrl,
@@ -28,6 +30,7 @@ class UserProfileDTO {
   factory UserProfileDTO.fromJson(Map<String, dynamic> json) {
     return UserProfileDTO(
       name: json['name'] ?? '',
+      email: json['email'] ?? '',
       location: json['location'] ?? '',
       description: json['description'] ?? '',
       profileImageUrl: json['profileImageUrl'] ?? '',
