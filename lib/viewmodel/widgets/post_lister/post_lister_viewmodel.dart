@@ -67,7 +67,7 @@ class PostListerViewModel extends StatelessWidget {
   // );
   //
 
-  static AppBar buildAppBar(BuildContext context) {
+  static AppBar buildAppBar(BuildContext context, String option) {
     return AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -75,7 +75,7 @@ class PostListerViewModel extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Text('Market Listing')
+        title: Text('My $option')
     );
   }
 

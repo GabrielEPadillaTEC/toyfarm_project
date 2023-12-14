@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toyfarn_project/config/router/list_router.dart';
 import 'package:toyfarn_project/viewmodel/widgets/widgets.dart';
-import 'package:toyfarn_project/viewmodel/views/profile_view_t.dart';
+import 'package:toyfarn_project/viewmodel/views/profile_view.dart';
 
 class ProfileScreen extends StatelessWidget with AppBarCustom {
   static const String screenName = 'profile_screen';

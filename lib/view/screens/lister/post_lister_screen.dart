@@ -12,7 +12,7 @@ class PostListerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PostListerViewModel.buildAppBar(context), // se manda llamar al viewmodel
+      appBar: PostListerViewModel.buildAppBar(context, option), // se manda llamar al viewmodel
       body: PostListerViewModel(userUID: userUID, optionSelect: option), // lo mismo
     );
   }

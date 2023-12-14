@@ -1,6 +1,6 @@
 
  class DioConnection {
-  static const String baseApiUrl = 'http://10.1.12.138:5000/';
+  static const String baseApiUrl = 'http://192.168.0.121:5000/';
 
   static String getApiUrl(String apiRoute) {
    return baseApiUrl + apiRoute;
