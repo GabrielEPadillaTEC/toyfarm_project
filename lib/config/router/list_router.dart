@@ -19,6 +19,11 @@ final List<RouteBase> routes = [
     builder: (context, state) => const LoginScreen(),
   ),
   GoRoute(
+    path: '/logOut',
+    name: LogOutScreen.screenName,
+    builder: (context, state) => const LogOutScreen(),
+  ),
+  GoRoute(
     path: '/register',
     name: RegisterScreen.screenName,
     builder: (context, state) => const RegisterScreen(),

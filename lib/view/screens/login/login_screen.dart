@@ -42,17 +42,13 @@ class _LoginViewState extends State<_LoginView> {
     });
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _usernameController.text,
         password: _passwordController.text,
       );
-      // Store the user credentials globally
-      //context.read(userProvider.notifier).setUser(userCredential.user);
-
-      // Authentication successful, navigate to the desired screen
+     //home pero del catalogo no del debug
       GoRouter.of(context).go('/HomeCatalog');
     } catch (e) {
-      // Handle authentication errors here
       setState(() {
         _errorMessage = 'Email or password introduced were invalid';
       });
