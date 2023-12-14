@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:toyfarn_project/domain/entities/entities.dart';
 import 'package:toyfarn_project/domain/entities/offer.dart';
 import 'package:toyfarn_project/infrastructure/mappers/offer_mapper.dart';
+import 'package:toyfarn_project/infrastructure/mappers/listing_mapper.dart';
 import 'package:toyfarn_project/config/helpers/dioConnection.dart';
 class UserListerApiService {
   final Dio _dio = Dio();
@@ -9,30 +11,38 @@ class UserListerApiService {
 
   List<OfferEntity> get offerList => _offersList;
 
-  late List<OfferEntity> _offersList;
+  late List<PostListingDetails> _listingsList;
 
-  List<OfferEntity> get offerList => _offersList;
+  List<PostListingDetails> get listingsList => _listingsList;
+  late bool exists;
 
-  Future<void> getUserOffersListings(String userUID,int opcion) async {
-
-    if(opcion==1) {
+  Future<void> getUserOffersListings(String userUID,String option) async {
+    print(option);
+    if(option=='offers') {
       try {
         final response = await _dio.get(
-            DioConnection.getApiUrl('post_users_offers/$userUID'));
+            DioConnection.getApiUrl('user_listings/$userUID'));
         final apiResponse = response.data;
         _offersList = OfferMapper.mapApiResponseToEntity(apiResponse);
+        exists=true;
       } catch (error) {
-        throw Exception('Failed to get post listing offer data');
+        exists=false;
+        print('Error fetching user profile: $error');
+
       }
-    }else if(opcion==2) {
+    }else if(option=='listings') {
       try {
         final response = await _dio.get(
-            DioConnection.getApiUrl('post_users_listings/$userUID'));
+            DioConnection.getApiUrl('user_offers/$userUID'));
         final apiResponse = response.data;
-        _offersList = OfferMapper.mapApiResponseToEntity(apiResponse);
+        _listingsList = PostListingMapper.mapApiResponseToEntity(apiResponse);
+        exists=true;
       } catch (error) {
-        throw Exception('Failed to get post listing offer data');
+        exists=false;
+        print('Error fetching user profile: $error');
       }
+    }else{
+      exists=false;
     }
   }
 }

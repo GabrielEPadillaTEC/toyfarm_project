@@ -80,87 +80,89 @@ class ModelCatalogScreen extends StatelessWidget{
       return _buildOptionCatalog(models);
 
     } else {
-      return Container(
-        color: const Color(0xFFFCE9D3), // Very pale orange
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome to ToyFarm!',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+      return SingleChildScrollView(
+        child: Container(
+          color: const Color(0xFFFCE9D3), // Very pale orange
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome to ToyFarm!',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 10.0),
-            Image.asset(
-              'assets/images/logo.png',
-              height: 100.0,
-              width: 100.0,
-            ),
-            const SizedBox(height: 10.0),
-            const Text(
-              'Home to creators and hobbyists alike',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 16.0,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            const Text(
-              'We currently host a variety of services',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 16.0,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            const Text(
-              'News:',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                  'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 16.0,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            const Text(
-              'About us:',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                  'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 16.0,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            // Chess piece image with 20% opacity
-            Opacity(
-              opacity: 0.2,
-              child: Image.asset(
-                'assets/images/LightPawn.webp',
+              const SizedBox(height: 10.0),
+              Image.asset(
+                'assets/images/logo.png',
                 height: 100.0,
                 width: 100.0,
               ),
-            ),
-          ],
+              const SizedBox(height: 10.0),
+              const Text(
+                'Home to creators and hobbyists alike',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                'We currently host a variety of services',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                'News:',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                    'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                'About us:',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                    'Pellentesque euismod justo vel dolor malesuada, vel pharetra ligula hendrerit.',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              // Chess piece image with 20% opacity
+              Opacity(
+                opacity: 0.2,
+                child: Image.asset(
+                  'assets/images/LightPawn.webp',
+                  height: 100.0,
+                  width: 100.0,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }

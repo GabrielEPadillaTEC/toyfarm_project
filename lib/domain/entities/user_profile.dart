@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserProfile {
   final String name;
+  final String email;
   final String location;
   final String description;
   final String profileImageUrl; // Assuming a string for image URL or path
@@ -15,6 +16,7 @@ class UserProfile {
 
   UserProfile({
     required this.name,
+    required this.email,
     required this.location,
     required this.description,
     required this.profileImageUrl,

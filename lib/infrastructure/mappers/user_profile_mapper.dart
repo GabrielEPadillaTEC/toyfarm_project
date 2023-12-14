@@ -5,6 +5,7 @@ class UserProfileMapper {
   static UserProfile userProfileDTOToEntity(UserProfileDTO userProfileDTO) {
     return UserProfile(
       name: userProfileDTO.name,
+      email: userProfileDTO.email,
       location: userProfileDTO.location,
       description: userProfileDTO.description,
       profileImageUrl: userProfileDTO.profileImageUrl,
@@ -20,6 +21,7 @@ class UserProfileMapper {
   static UserProfileDTO mapApiResponseToDTO(Map<String, dynamic> apiResponse) {
     return UserProfileDTO(
       name: apiResponse['name'] ?? '',
+      email: apiResponse['email'] ?? '',
       location: apiResponse['location'] ?? '',
       description: apiResponse['description'] ?? '',
       profileImageUrl: apiResponse['profileImageUrl'] ?? '',

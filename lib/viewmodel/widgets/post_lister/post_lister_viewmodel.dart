@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:toyfarn_project/config/menu/menu_items.dart';
+import 'package:toyfarn_project/domain/entities/entities.dart';
 import 'package:toyfarn_project/viewmodel/widgets/slideMenu/slide_menu.dart';
 import 'package:toyfarn_project/domain/entities/offer.dart';
 import 'package:toyfarn_project/viewmodel/providers/profile_viewmodel.dart';
@@ -12,11 +13,11 @@ import '../../../config/helpers/userOffersDio.dart';
 class PostListerViewModel extends StatelessWidget {
 
   final String userUID;
-  final int opcionSelect;
+  final String optionSelect;
   //ofers 1
   //listings 2
 
-  const PostListerViewModel({super.key, required this.userUID,required this.opcionSelect});
+  const PostListerViewModel({super.key, required this.userUID,required this.optionSelect});
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +26,41 @@ class PostListerViewModel extends StatelessWidget {
 
     return SingleChildScrollView(
         child: FutureBuilder(
-            future: api.getUserOffersListings(userUID,opcionSelect),
+            future: api.getUserOffersListings(userUID,optionSelect),
             builder: (context, snapshot) {
-              return (snapshot.connectionState == ConnectionState.done)
-                  ? _buildOffers(api.offerList)
-                  : const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.cyan,
-                ),
-              ); // Pass the offers to the widget
-            }));
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (!api.exists) {
+                return Center(); }
+              else {
+                if (optionSelect=="offers"){
+                  _buildOffers(api.offerList);
+                }else if (optionSelect=="listings"){
+                  _buildListings(api.listingsList);
+                }
+                return Container();
+              }
+              })
+        );
   }
-
+//prototipo futures
+  // FutureBuilder(
+  // future: api.getUserOffersListings(userUID,optionSelect),
+  // builder: (context, snapshot) {
+  // if (snapshot.connectionState == ConnectionState.waiting) {
+  // return Center(
+  // child: CircularProgressIndicator(),
+  // );
+  // } else if (!profileViewModel.exists) {
+  // return Center(); }
+  // else {
+  // return Container();
+  // }
+  // })
+  // );
+  //
 
   static AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -71,6 +95,30 @@ class PostListerViewModel extends StatelessWidget {
       children: [
         const Text('Offers:'),
         for (var offer in offers) _buildOfferItem(offer),
+      ],
+    );
+  }
+  Widget _buildListings(List<PostListingDetails> listings) {
+    if (listings.isEmpty) {
+      return Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(vertical: 16.0),
+        child: const Text(
+          'No Listings yet',
+          style: TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Listings:'),
+        for (var listing in listings) _buildListingsItem(listing),
       ],
     );
   }
@@ -157,6 +205,63 @@ class PostListerViewModel extends StatelessWidget {
               );
             }));
   }
+
+  Widget _buildListingsItem(PostListingDetails listing) {
+    // Create a ProfileViewModel for each offer
+    final profileViewModel = ProfileViewModel();
+    //profileViewModel.fetchUserProfile(offer.userProfileId);
+
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        child: FutureBuilder(
+            future: profileViewModel.fetchUserProfile(listing.vendorId),
+            builder: (context, snapshot) {
+              return (snapshot.connectionState == ConnectionState.done)
+                  ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundImage: NetworkImage(
+                            profileViewModel.userProfile.profileImageUrl),
+                        // You can use the actual image URL or path from the ProfileViewModel
+                        // profileViewModel.userProfile.profileImageUrl,
+                      ),
+                      const SizedBox(width: 8.0),
+                      // Display the user's name from the ProfileViewModel
+                      Text(
+                        // Use the actual user's name from the ProfileViewModel
+                        // profileViewModel.userProfile.name,
+                        profileViewModel.userProfile.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    // Display the offer details
+                    'Selling for \$${listing.price}',
+                    style: const TextStyle(color: Colors.green),
+                  ),
+                  const SizedBox(height: 8.0),
+                ],
+              )
+                  : const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.cyan,
+                ),
+              );
+            }));
+
+
+}
 
 }
 

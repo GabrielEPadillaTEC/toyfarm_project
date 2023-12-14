@@ -30,7 +30,7 @@ final List<RouteBase> routes = [
   ),
   GoRoute(
     path: '/YourProfile',
-    name: ProfileScreen.screenName,
+    name: ProfileScreen.screenNameYou,
     builder: (context, state) => ProfileScreen(profileuid: userId),
   ),
   GoRoute(
@@ -81,17 +81,17 @@ final List<RouteBase> routes = [
   GoRoute(
     path: '/post_lister',
     name: PostListerScreen.screenName,
-    builder: (context, state) => const PostListerScreen(option: 'offers','0'),
+    builder: (context, state) => const PostListerScreen(option: 'offers', userUID:'0'),
   ),
   GoRoute(
     path: '/YourListings',
     name: PostListerScreen.screenNameLister,
-    builder: (context, state) => PostListerScreen(option: 'listers',profileuid: userId),
+    builder: (context, state) => PostListerScreen(option: 'listings',userUID: userId),
   ),
   GoRoute(
     path: '/YourOffers',
     name: PostListerScreen.screenNameOffers,
-    builder: (context, state) => PostListerScreen(option: 'offers',profileuid: userId),
+    builder: (context, state) => PostListerScreen(option: 'offers',userUID: userId),
   ),
   GoRoute(
     path: '/chat',

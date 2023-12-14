@@ -6,6 +6,7 @@ class PostListingDetails {
   final String price;
   final String description;
   final String vendorName;
+  final String vendorId;
   final String vendorDetails;
   final List<OfferEntity> offers;
 
@@ -15,6 +16,7 @@ class PostListingDetails {
     required this.price,
     required this.description,
     required this.vendorName,
+    required this.vendorId,
     required this.vendorDetails,
     this.offers = const [],  // Default to an empty list if not provided
   });

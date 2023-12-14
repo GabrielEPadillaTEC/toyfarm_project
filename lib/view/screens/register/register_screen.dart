@@ -58,6 +58,7 @@ class _RegisterViewState extends State<_RegisterView> with  CustomSnackBars{
 
         UserProfileDTO userProfile = UserProfileDTO(
           name: _nicknameController.text,
+          email: _usernameController.text,
           location: 'City TBA',
           description: 'Im a New User',
           profileImageUrl: 'https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg',

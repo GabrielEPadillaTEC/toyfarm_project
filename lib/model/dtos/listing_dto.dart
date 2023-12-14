@@ -4,6 +4,7 @@ class PostListingDTO {
   final String price;
   final String description;
   final String vendorName;
+  final String vendorId;
   final String vendorDetails;
 
   PostListingDTO({
@@ -12,6 +13,7 @@ class PostListingDTO {
     required this.price,
     required this.description,
     required this.vendorName,
+    required this.vendorId,
     required this.vendorDetails,
   });
 
@@ -22,6 +24,7 @@ class PostListingDTO {
       price:   json[''] ?? '',
       description:   json[''] ?? '',
       vendorName:   json[''] ?? '',
+      vendorId:   json[''] ?? '',
       vendorDetails:   json[''] ?? '',
     );
   }
@@ -34,6 +37,7 @@ class PostListingDTO {
       'price': price,
       'description': description,
       'vendorName': vendorName,
+      'vendorId': vendorId,
       'vendorDetails': vendorDetails,
     };
   }
