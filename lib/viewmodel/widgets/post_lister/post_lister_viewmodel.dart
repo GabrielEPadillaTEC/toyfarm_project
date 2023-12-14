@@ -32,16 +32,21 @@ class PostListerViewModel extends StatelessWidget {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (!api.exists) {
-                return Center(); }
+              }
+              else if (!api.exists) {
+                return Center(
+                    child: Text('Aqui salio mal algo por que no existe')
+                ); }
               else {
                 if (optionSelect=="offers"){
-                  _buildOffers(api.offerList);
+                  return _buildOffers(api.offerList);
                 }else if (optionSelect=="listings"){
-                  _buildListings(api.listingsList);
-                }
-                return Container();
-              }
+                  return _buildListings(api.listingsList);
+                }else {
+                  return Container(
+                      child: Text('Aqui salio mal algo')
+                  );
+                } }
               })
         );
   }
@@ -245,10 +250,19 @@ class PostListerViewModel extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8.0),
-                  Text(
-                    // Display the offer details
-                    'Selling for \$${listing.price}',
-                    style: const TextStyle(color: Colors.green),
+                  Row(
+                    children: [
+                      Text(
+                        // Display the offer details
+                        'Selling for \$${listing.price}',
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                      Text(
+                        // Display the offer details
+                        '   Article: ${listing.title}',
+                        style: const TextStyle(color: Colors.green),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 8.0),
                 ],

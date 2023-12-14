@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:toyfarn_project/viewmodel/widgets/slideMenu/slide_menu.dart';
 
+import '../../../config/helpers/dioConnection.dart';
 import '../../../model/dtos/catalog_dto.dart';
 
 class ModelCatalogScreen extends StatelessWidget{
@@ -53,31 +57,66 @@ class ModelCatalogScreen extends StatelessWidget{
  Widget _buildCatalog() {
 
     if (option == 'listings') {
-      List<ModelCatalogDTO> models = [
-        ModelCatalogDTO(name: 'Model 1', cost: 'Cost 1' ),
-        ModelCatalogDTO(name: 'Model 2', cost: 'Cost 2' ),
-        ModelCatalogDTO(name: 'Model 3', cost: 'Cost 3' ),
-        // ... valores locales de prueba
-      ];
-      return _buildOptionCatalog(models);
+
+
+      return FutureBuilder<List<ModelCatalogDTO>>(
+        future: fetchAllListings(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError || snapshot.data == null) {
+            return Container(
+              child: Text("An unexpected error occurred."),
+            );
+          } else {
+            List<ModelCatalogDTO> models = snapshot.data!;
+            return _buildOptionCatalog(models);
+          }
+        },
+      );
+
 
     } else if (option == 'services') {
-      List<ModelCatalogDTO> models = [
-        ModelCatalogDTO(name: 'Model 4', cost: 'Cost 1' ),
-        ModelCatalogDTO(name: 'Model 5', cost: 'Cost 2' ),
-        ModelCatalogDTO(name: 'Model 6', cost: 'Cost 3' ),
-        // ... valores locales de prueba
-      ];
-      return _buildOptionCatalog(models);
+
+      return FutureBuilder<List<ModelCatalogDTO>>(
+        future: fetchAllListings(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError || snapshot.data == null) {
+            return Container(
+              child: Text("An unexpected error occurred."),
+            );
+          } else {
+            List<ModelCatalogDTO> models = snapshot.data!;
+            return _buildOptionCatalog(models);
+          }
+        },
+      );
 
     } else if (option == 'models') {
-      List<ModelCatalogDTO> models = [
-        ModelCatalogDTO(name: 'Model 7', cost: 'Cost 1' ),
-        ModelCatalogDTO(name: 'Model 8', cost: 'Cost 2' ),
-        ModelCatalogDTO(name: 'Model 9', cost: 'Cost 3' ),
-        // ... valores locales de prueba
-      ];
-      return _buildOptionCatalog(models);
+
+      return FutureBuilder<List<ModelCatalogDTO>>(
+        future: fetchAllListings(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError || snapshot.data == null) {
+            return Container(
+              child: Text("An unexpected error occurred."),
+            );
+          } else {
+            List<ModelCatalogDTO> models = snapshot.data!;
+            return _buildOptionCatalog(models);
+          }
+        },
+      );
 
     } else {
       return SingleChildScrollView(
@@ -232,6 +271,39 @@ class ModelCatalogScreen extends StatelessWidget{
         ],
       ),
     );
+  }
+}
+
+class ModelCatalogDTO {
+  final String name;
+  final String cost;
+  final int id;
+
+  ModelCatalogDTO({
+    required this.name,
+    required this.cost,
+    required this.id,
+  });
+}
+
+Future<List<ModelCatalogDTO>> fetchAllListings() async {
+  final Dio _dio = Dio();
+  try {
+    final response = await _dio.get(DioConnection.getApiUrl('all_listings'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = response.data;
+      return jsonList.map((json) => ModelCatalogDTO(
+        name: json['name'] ?? '',
+        cost: json['cost'] ?? '',
+        id: json['id'] ?? 0,
+      )).toList();
+    } else {
+      throw Exception('Failed to load listings');
+    }
+  } catch (error) {
+    print('Error fetching listings: $error');
+    throw Exception('Failed to load listings');
   }
 }
 
