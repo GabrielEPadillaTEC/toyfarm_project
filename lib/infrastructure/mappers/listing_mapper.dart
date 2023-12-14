@@ -13,6 +13,7 @@ class PostListingMapper {
       vendorName: postListingDTO.vendorName,
       vendorId: postListingDTO.vendorId,
       vendorDetails: postListingDTO.vendorDetails,
+      images: postListingDTO.images
     );
   }
   static PostListingDTO mapApiResponseToDTO(Map<String, dynamic> apiResponse) {
@@ -24,6 +25,7 @@ class PostListingMapper {
       vendorName: apiResponse['vendorName'] ?? '',
       vendorId: apiResponse['vendorId'] ?? '',
       vendorDetails: apiResponse['vendorDetails'] ?? '',
+      images: (apiResponse['images'] as List<dynamic>?)?.cast<String>() ?? []
     );
   }
   static List<PostListingDetails> mapApiResponseToEntity(dynamic offerData) {
@@ -36,7 +38,6 @@ class PostListingMapper {
   }
 
   static PostListingDetails _mapOffer(Map<String, dynamic> data) {
-    print('222222');
     return PostListingDetails(
 
       id: data['id'] as int,
@@ -46,6 +47,7 @@ class PostListingMapper {
       vendorName: data['vendorName'] as String,
       vendorId: data['vendorId'] as String,
       vendorDetails: data['vendorDetails'] as String,
+      images: (data['images'] as List<dynamic>).cast<String>(),
     );
 
 

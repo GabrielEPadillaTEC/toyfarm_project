@@ -6,6 +6,7 @@ class PostListingDTO {
   final String vendorName;
   final String vendorId;
   final String vendorDetails;
+  final List<String>images;
 
   PostListingDTO({
     required this.id,
@@ -15,6 +16,7 @@ class PostListingDTO {
     required this.vendorName,
     required this.vendorId,
     required this.vendorDetails,
+    required this.images
   });
 
   factory PostListingDTO.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class PostListingDTO {
       vendorName:   json[''] ?? '',
       vendorId:   json[''] ?? '',
       vendorDetails:   json[''] ?? '',
+      images: (json['images'] as List<dynamic>?)?.cast<String>() ?? []
     );
   }
 
@@ -39,6 +42,7 @@ class PostListingDTO {
       'vendorName': vendorName,
       'vendorId': vendorId,
       'vendorDetails': vendorDetails,
+      'images': images
     };
   }
 }

@@ -18,24 +18,24 @@ class UserListerApiService {
 
   Future<void> getUserOffersListings(String userUID,String option) async {
     print(option);
-    if(option=='offers') {
+    if(option=='listings') {
       try {
         final response = await _dio.get(
             DioConnection.getApiUrl('user_listings/$userUID'));
         final apiResponse = response.data;
-        _offersList = OfferMapper.mapApiResponseToEntity(apiResponse);
+        _listingsList = PostListingMapper.mapApiResponseToEntity(apiResponse);
         exists=true;
       } catch (error) {
         exists=false;
         print('Error fetching user profile: $error');
 
       }
-    }else if(option=='listings') {
+    }else if(option=='offers') {
       try {
         final response = await _dio.get(
             DioConnection.getApiUrl('user_offers/$userUID'));
         final apiResponse = response.data;
-        _listingsList = PostListingMapper.mapApiResponseToEntity(apiResponse);
+        _offersList = OfferMapper.mapApiResponseToEntity(apiResponse);
         exists=true;
       } catch (error) {
         exists=false;
